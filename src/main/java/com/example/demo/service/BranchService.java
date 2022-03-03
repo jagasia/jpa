@@ -45,5 +45,8 @@ public class BranchService {
 		return b;
 	}	
 	
-	
+	public List<Branch> findBranchesByCity(String bcity)
+	{
+		return br.findBranchesByCity(bcity);
+	}
 }

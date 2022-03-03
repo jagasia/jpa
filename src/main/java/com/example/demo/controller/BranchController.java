@@ -4,9 +4,13 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.model.Branch;
 import com.example.demo.service.BranchService;
@@ -55,5 +59,19 @@ public class BranchController {
 		bs.delete(branch.getBid());
 		branches(branch);
 		return "branch";
+	}
+	
+	@GetMapping("/showfind1")
+	public String showFind1()
+	{
+		return "find1";
+	}
+	
+	@PostMapping("/find")
+	public String findBranchesByCity(@RequestParam("bcity") String bcity, Model model)
+	{
+		List<Branch> branches = bs.findBranchesByCity(bcity);
+		model.addAttribute("branches", branches);
+		return "showbranches";
 	}
 }
